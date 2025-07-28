@@ -1,4 +1,4 @@
-# トラブルシュート#6-1: `Could not read workspace metadata` エラーを解決する
+# トラブルシュート#7-1: `Could not read workspace metadata` エラーを解決する
 
 FlutterでAndroidアプリをビルドしていると、突然以下のようなエラーに遭遇することがあります。
 
