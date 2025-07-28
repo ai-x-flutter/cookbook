@@ -6,7 +6,7 @@ AIと共にアプリのコア機能を開発し、品質を高めました。い
 
 > **⚠️ 事前準備**
 > *   [Google Play Console](https://play.google.com/console/) と [Apple Developer Program](https://developer.apple.com/programs/) への開発者登録を済ませておいてください。
-> *   [公開前の準備](../05_serving_the_app/00_introduction.md)で解説した、アプリアイコン、スクリーンショット、プライバシーポリシーのURLなどを用意しておいてください。
+> *   [公開前の準備](../01_the_kitchen/04_project_identity_and_assets.md)で解説した、アプリアイコン、スクリーンショット、プライバシーポリシーのURLなどを用意しておいてください。
 
 ---
 
