@@ -126,12 +126,31 @@
 このCookbookは、コミュニティと共に成長していきます。
 新しいレシピの提案、誤字脱字の修正、より良い説明のアイデアなど、どんな小さな貢献も大歓迎です。IssueやPull Requestをお気軽にお送りください！
 
+
+---
+
 ## 📜 License
 
-このリポジトリは、コンテンツの種類に応じて異なるライセンスを適用するデュアルライセンス方式を採用しています。
+このリポジトリは、コンテンツの性質に応じてライセンスを使い分けています。
 
-*   **ドキュメント (`docs/` ディレクトリ):**
-    `docs/`ディレクトリに含まれるすべてのドキュメント（文章、マニュアル）は、[Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA 4.0)](http://creativecommons.org/licenses/by-sa/4.0/) の下でライセンスされています。
+### ドキュメント (`docs/` ディレクトリ)
 
-*   **ソースコード (`examples/` ディレクトリなど):**
-    上記ドキュメント以外の、すべてのソースコードは [MIT License](LICENSE) の下でライセンスされています。
+`docs/`ディレクトリに含まれるすべてのドキュメント（文章、マニュアル）は、**[Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA 4.0)](LICENSE)** の下でライセンスされています。
+
+このライセンスは、このCookbookの知識が、常にオープンな形でコミュニティに共有され、発展し続けることを保証するためのものです。このドキュメントを元に派生作品を作る場合は、同じライセンスで公開してください。
+
+[![CC BY-SA 4.0][cc-by-sa-shield]][cc-by-sa]
+
+[cc-by-sa]: http://creativecommons.org/licenses/by-sa/4.0/
+[cc-by-sa-shield]: https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg
+
+### サンプルコード (`examples/` ディレクトリ)
+
+`examples/`ディレクトリに含まれるすべてのサンプルコードは、**[Creative Commons Zero v1.0 Universal (CC0 1.0)](examples/LICENSE)** の下で、**パブリックドメイン**に提供されています。
+
+これは、あなたがCookbookで学んだコードを、**いかなる制約もなく、著作権表示の義務すらなく**、商用・非商用を問わず、あらゆるプロジェクトで完全に自由に、そして安心して再利用できるようにするためです。
+
+[![CC0][cc0-shield]][cc0]
+
+[cc0]: http://creativecommons.org/publicdomain/zero/1.0/
+[cc0-shield]: https://img.shields.io/badge/License-CC0%201.0-lightgrey.svg
