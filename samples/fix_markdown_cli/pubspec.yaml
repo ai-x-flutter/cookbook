@@ -1,0 +1,9 @@
+name: fix_markdown_cli
+description: A command-line tool to fix markdown bolding issues in a Git repository.
+version: 1.0.0
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  args: ^2.4.2 # コマンドライン引数の解析用
+
