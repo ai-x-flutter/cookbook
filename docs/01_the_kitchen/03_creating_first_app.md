@@ -97,13 +97,13 @@ flutter create my_first_app
 
 > **⚠️ Application IDの設定**
 >
-> 本格的なアプリ開発を見据えるなら、この時点で**Application ID**を指定することが強く推奨されます。これは、後から変更不可能な、アプリの「戸籍」です。
+> 公開するアプリを開発をする場合は、この時点で**Application ID**を指定することが強く推奨されます。これは、後から変更不可能な、アプリの「戸籍」です。
 >
 > 独自ドメインを持っている場合は、`--org`オプションを使って逆ドメイン名を指定します。
 > ```bash
 > flutter create --org com.yourdomain my_first_app
 > ```
-> 詳しくは、[Application IDの設定マニュアル](./04_project_setup_and_appid.md)をご覧ください。
+> 詳しくは、次章をご覧ください。
 
 ## Step 2: プロジェクトのフォルダ構成を探検する
 
