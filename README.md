@@ -122,7 +122,16 @@
 
 ---
 
-### section 8: Backend For Frontend (BFF) with AI
+### sección 8: ☁️ BFFとサーバーサイドDart (Backend For Frontend)
+*AIと共に、Flutterアプリのためのバックエンド（BFF）をDartで構築します。*
+
+*   [#8-1: なぜDartでバックエンドを作るのか？ (BFFの概念)](docs/08_backend_for_frontend_with_ai/01_why_dart_for_backend.md)
+*   [#8-2: Dartバックエンドフレームワークの選定](docs/08_backend_for_frontend_with_ai/02_choosing_backend_framework.md)
+*   [#8-3: AIと作るシンプルなREST API (Dart Frog編)](docs/08_backend_for_frontend_with_ai/03_building_simple_api_with_dart_frog.md)
+*   [#8-4: FlutterアプリとDartバックエンドでコードを共有する](docs/0s8_backend_for_frontend_with_ai/04_sharing_code_between_flutter_and_backend.md)
+*   [#8-5: AIと創るフルスタック認証 (Serverpod編)](docs/08_backend_for_frontend_with_ai/05_full_stack_development_with_serverpod.md)
+*   [#8-6: AIと実装するリアルタイム通信 (WebSocket編)](docs/08_backend_for_frontend_with_ai/06_realtime_communication_with_websockets.md)
+*   [#8-7: AIとデプロイするDartバックエンド (Cloud Run編)](docs/08_backend_for_frontend_with_ai/07_deploying_dart_backend_with_ai.md)
 
 ---
 
