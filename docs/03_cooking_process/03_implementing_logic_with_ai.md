@@ -82,7 +82,7 @@ final memoProvider = NotifierProvider<MemoNotifier, List<Memo>>(() {
 >
 > 次に、以前作成した`screens/home_screen.dart`を、**この`memoProvider`と連携させてください。**
 >
-> **【元のUIコード】**
+> 【**元のUIコード**】
 > ```dart
 > // (ここに、ListView.builderでダミーデータを表示していたHomeScreenのコードを貼り付ける)
 > ```
@@ -108,7 +108,7 @@ final memoProvider = NotifierProvider<MemoNotifier, List<Memo>>(() {
 >
 > これまでの対話で完成した`memo_provider.dart`と`home_screen.dart`のコードを提示します。
 >
-> **【コード全体】**
+> 【**コード全体**】
 > ```dart
 > // (ここに、完成した2つのファイルのコードをすべて貼り付ける)
 > ```

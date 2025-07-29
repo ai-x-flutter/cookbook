@@ -83,7 +83,7 @@ class CirclePainter extends CustomPainter {
 > **要件:**
 > 1.  `PieChartPainter`という名前の`CustomPainter`を作成する。
 > 2.  このPainterは、`List<double> data`（例: `[10, 20, 30, 40]`）と`List<Color> colors`をコンストラクタで受け取る。
-> 3.  データリストの各値の比率に応じて、円グラフの各セクターの**開始角度（startAngle）**と**掃引角度（sweepAngle）**を計算し、`canvas.drawArc`を使って描画する。
+> 3.  データリストの各値の比率に応じて、円グラフの各セクターの**開始角度（startAngle**）と**掃引角度（sweepAngle**）を計算し、`canvas.drawArc`を使って描画する。
 > 4.  各セクターは、対応する色で塗りつぶす。
 > 5.  ラジアン（Radian）の計算など、必要な数学的処理もすべて実装する。
 >

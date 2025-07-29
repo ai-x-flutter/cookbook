@@ -53,7 +53,7 @@ output-localization-file: app_localizations.dart
 > 以下のFlutter国際化用`.arb`ファイル（英語）の内容を、**自然な日本語に翻訳**し、日本語用の`.arb`ファイル（`app_ja.arb`）を生成してください。
 > JSONのキーは変更せず、値（文字列）だけを翻訳してください。
 >
-> **【元のファイル: `app_en.arb`】**
+> 【**元のファイル: `app_en.arb`**】
 > ```json
 > {
 >   "helloWorld": "Hello World!",
@@ -101,12 +101,12 @@ Text(AppLocalizations.of(context)!.helloWorld)
 > 以下のFlutterのウィジェットコードがあります。
 > ハードコーディングされている文字列（例: `'Photo Memo App'`）を、`intl`パッケージで生成された`AppLocalizations.of(context)!`を使った形式に書き換えてください。
 >
-> **【元のコード】**
+> 【**元のコード**】
 > ```dart
 > // (ここに、ハードコーディングされた文字列を含むウィジェットのコードを貼り付ける)
 > ```
 >
-> **【対応する.arbのキー】**
+> 【**対応する.arbのキー**】
 > - `'Photo Memo App'` -> `appTitle`
 > - `'Add Memo'` -> `addMemoButton`
 >
