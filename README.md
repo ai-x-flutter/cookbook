@@ -142,6 +142,7 @@
 *   [#9-0: はじめに - なぜ設計が重要か](docs/09_ai_for_design_and_prototyping/00_introduction.md)
 *   [#9-1: AIと創るデザインシステム](docs/09_ai_for_design_and_prototyping/01_creating_a_design_system_with_ai.md)
 *   [#9-2: AIと定義するユーザーペルソナとユーザーストーリー](docs/09_ai_for_design_and_prototyping/02_generating_personas_and_user_stories.md)
+*   [#9-3: AI x Flutter時代のキャリアパスを設計する](docs/09_ai_for_design_and_prototyping/03_ai_x_flutter_career_path.md)
 
 ---
 
