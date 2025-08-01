@@ -51,6 +51,7 @@
 *   [#1-3: 最初のFlutterアプリ作成とプロジェクト探検](docs/01_the_kitchen/03_creating_first_app.md)
 *   [#1-4: アプリのIDとアセットの準備](docs/01_the_kitchen/04_project_identity_and_assets.md)
 *   [#1-5: 自分のプロジェクトをGitHubで管理する](docs/01_the_kitchen/05_managing_project_with_github.md)
+*   [#1-6: GitHub CLIでPCを認証する](docs/01_the_kitchen/06_authenticating_with_github_cli.md)
 
 ---
 
