@@ -53,7 +53,12 @@
 1.  **ターミナルを開き、プロジェクトのルートディレクトリに移動します。**
     ```bash
     # 前のレシピで作成した my_first_app フォルダに移動
-    cd my_first_app
+    # Windowsの場合
+    cd C:\dev\ai-x-flutter\my_first_app
+    # Macの場合
+    cd ~/Development/ai-x-flutter/my_first_app
+    # Linuxの場合
+    cd ~/dev/ai-x-flutter/my_first_app
     ```
 
 2.  **`git init`コマンドで、Gitリポジトリを初期化します。**
