@@ -54,7 +54,7 @@
     ```bash
     # 前のレシピで作成した my_first_app フォルダに移動
     # Windowsの場合
-    cd C:\dev\ai-x-flutter\my_first_app
+    cd c:\dev\ai-x-flutter\my_first_app
     # Macの場合
     cd ~/Development/ai-x-flutter/my_first_app
     # Linuxの場合
