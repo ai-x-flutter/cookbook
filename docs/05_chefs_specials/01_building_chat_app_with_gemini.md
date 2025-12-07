@@ -143,7 +143,7 @@ Future<Stream<String>> sendMessage(String message, List<Message> history)
   - 引数: ユーザーメッセージとチャット履歴
   - 戻り値: ストリーミングレスポンス（Stream<String>）
   - APIエンドポイント: https://api.anthropic.com/v1/messages
-  - モデル: claude-3-5-sonnet-20241022
+  - モデル: claude-opus-4-20250514（または最新のOpus 4.5モデルID）
   - ヘッダー:
     - x-api-key: APIキー
     - anthropic-version: 2023-06-01
