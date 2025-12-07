@@ -7,6 +7,7 @@
 1.  **Cursor:** AIコーディングエディタ - 実装の中心
 2.  **Claude (Anthropic):** 最もFlutterと相性の良いAIモデル
 3.  **Web版AIチャット:** 設計や仕様整理を助けてくれる「相談役」
+4.  **Claude Code:** GitHubと連携したリモートAI開発環境
 
 ## 1. Cursor: AIコーディングエディタ
 
@@ -133,7 +134,86 @@ Cursor内のAIモデルに加えて、Web版のAIチャットサービスも併�
 - 概念の理解（「状態管理とは？」など）
 - エラーメッセージの解読
 
-## 4. Google Antigravity について
+## 4. Claude Code: GitHubと連携したAI開発
+
+**Claude Code**は、Anthropic公式のCLIツールで、GitHubリポジトリと連携してAI開発を行える環境です。
+
+### 4-1. Claude Codeの特徴
+
+1. **リポジトリ直接アクセス**
+   - クラウド環境でリポジトリをクローン
+   - ファイルの直接編集が可能
+   - Git操作（コミット・プッシュ）を実行
+
+2. **ブランチベースの開発**
+   - 専用ブランチで作業
+   - 変更履歴を明確に管理
+   - Pull Requestでレビュー可能
+
+3. **ファイルアップロード不要**
+   - すでにリポジトリがクローン済み
+   - PCとの同期はGit経由
+   - クラウド環境で完結
+
+### 4-2. 開発ワークフロー
+
+```
+[Claude Code環境]
+    ↓
+1. ファイル編集・修正
+    ↓
+2. Gitコミット
+    ↓
+3. ブランチにプッシュ
+    ↓
+[あなたのPC]
+    ↓
+4. git pull または PR確認
+```
+
+### 4-3. 使い所
+
+**Claude Codeが適している場面：**
+- GitHubベースの開発
+- リモートでのコード修正
+- Pull Requestベースのレビュー
+- チーム開発での協働
+
+**注意点：**
+- PC内のローカルファイルは直接編集不可
+- Gitリポジトリが前提
+- 変更は専用ブランチにプッシュされる
+
+### 4-4. 実際の使用例
+
+```
+作業ディレクトリ: /home/user/cookbook
+現在のブランチ: claude/github-todo-guidelines-xxxxx
+
+# Claude Codeが実行
+1. ファイルを編集
+2. git commit -m "機能追加"
+3. git push -u origin claude/github-todo-guidelines-xxxxx
+
+# あなたが実行
+git fetch origin
+git checkout claude/github-todo-guidelines-xxxxx
+# または GitHub上でPRを確認
+```
+
+### 4-5. CursorとClaude Codeの使い分け
+
+| ツール | 用途 | リアルタイム編集 | GitHub連携 |
+|--------|------|----------------|-----------|
+| **Cursor** | ローカル開発 | ⭐⭐⭐ | 手動 |
+| **Claude Code** | リモート/PR開発 | - | ⭐⭐⭐ |
+
+**推奨：**
+- **日常開発:** Cursor（ローカル環境で即座に実行）
+- **GitHub Issue対応:** Claude Code（ブランチ管理が明確）
+- **レビュー依頼:** Claude Code（PRベースで共有）
+
+## 5. Google Antigravity について
 
 **注意:** Google Antigravityは2024年12月に発表された新しいAI統合開発環境ですが、2025年1月時点では以下の問題が報告されています：
 
@@ -151,7 +231,7 @@ Cursor内のAIモデルに加えて、Web版のAIチャットサービスも併�
 - Claude モデルを使用（Geminiより安定）
 - 小さなプロトタイプから始める
 
-## 5. 実践的な開発フロー
+## 6. 実践的な開発フロー
 
 ### 推奨される開発環境構成
 
@@ -196,6 +276,7 @@ Flutter プロジェクト
 
 **最適な構成:**
 - **メイン開発環境:** Cursor + Claude Sonnet 4.5
+- **GitHub連携開発:** Claude Code（リモート/PR開発）
 - **補完的な相談:** Web版AIチャット（Claude、ChatGPT）
 - **避けるべき:** Geminiでのコード生成、不安定なAntigravity（現時点）
 
