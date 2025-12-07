@@ -7,7 +7,7 @@
 1.  **Cursor:** AIコーディングエディタ - 実装の中心
 2.  **Claude (Anthropic):** 最もFlutterと相性の良いAIモデル
 3.  **Web版AIチャット:** 設計や仕様整理を助けてくれる「相談役」
-4.  **Claude Code:** GitHubと連携したリモートAI開発環境
+4.  **Claude Code:** ターミナルやGitHubで使えるAI開発環境
 
 ## 1. Cursor: AIコーディングエディタ
 
@@ -134,28 +134,59 @@ Cursor内のAIモデルに加えて、Web版のAIチャットサービスも併�
 - 概念の理解（「状態管理とは？」など）
 - エラーメッセージの解読
 
-## 4. Claude Code: GitHubと連携したAI開発
+## 4. Claude Code: ターミナルで使えるAI開発環境
 
-**Claude Code**は、Anthropic公式のCLIツールで、GitHubリポジトリと連携してAI開発を行える環境です。
+**Claude Code**は、Anthropic公式のCLIツールで、Claude Proの課金で利用できます。**2つの使い方**があります。
 
-### 4-1. Claude Codeの特徴
+### 4-1. Claude Codeの2つの使い方
 
-1. **リポジトリ直接アクセス**
-   - クラウド環境でリポジトリをクローン
-   - ファイルの直接編集が可能
-   - Git操作（コミット・プッシュ）を実行
+#### A. ターミナル版（CLI版）- ローカル開発
 
-2. **ブランチベースの開発**
-   - 専用ブランチで作業
-   - 変更履歴を明確に管理
-   - Pull Requestでレビュー可能
+**特徴：**
+- PCのターミナルから直接起動
+- ローカルファイルを直接編集可能
+- リアルタイムでコード実行・テスト
+- Git操作も自分でコントロール
 
-3. **ファイルアップロード不要**
-   - すでにリポジトリがクローン済み
-   - PCとの同期はGit経由
-   - クラウド環境で完結
+**使い方：**
+```bash
+# Claude Code CLIをインストール
+npm install -g @anthropic-ai/claude-code
 
-### 4-2. 開発ワークフロー
+# プロジェクトディレクトリで起動
+cd /path/to/your/flutter-project
+claude-code
+
+# Claudeと対話しながら開発
+> ボタンウィジェットを追加してください
+> このエラーを修正してください
+```
+
+**メリット：**
+- ローカル環境で即座に実行・確認
+- 自分のPCで完結
+- Cursorと併用可能
+
+**デメリット：**
+- CLIのインストールが必要
+- ターミナル操作に慣れる必要あり
+
+#### B. GitHub連携版（Web版）- リモート開発
+
+**特徴：**
+- クラウド環境でリポジトリをクローン
+- ファイルの直接編集が可能
+- Git操作（コミット・プッシュ）を実行
+- ブランチベースの開発
+- 変更履歴を明確に管理
+- Pull Requestでレビュー可能
+
+**ファイルアップロード不要：**
+- すでにリポジトリがクローン済み
+- PCとの同期はGit経由
+- クラウド環境で完結
+
+### 4-2. GitHub連携版の開発ワークフロー
 
 ```
 [Claude Code環境]
@@ -171,20 +202,47 @@ Cursor内のAIモデルに加えて、Web版のAIチャットサービスも併�
 4. git pull または PR確認
 ```
 
-### 4-3. 使い所
+### 4-3. それぞれの使い所
 
-**Claude Codeが適している場面：**
+**ターミナル版が適している場面：**
+- ローカル開発でAIの助けが欲しい
+- 即座にコードを実行・確認したい
+- Cursorの補完として使いたい
+- コマンドライン操作に慣れている
+
+**GitHub連携版が適している場面：**
 - GitHubベースの開発
 - リモートでのコード修正
 - Pull Requestベースのレビュー
 - チーム開発での協働
 
-**注意点：**
+**GitHub連携版の注意点：**
 - PC内のローカルファイルは直接編集不可
 - Gitリポジトリが前提
 - 変更は専用ブランチにプッシュされる
 
 ### 4-4. 実際の使用例
+
+#### ターミナル版の例：
+
+```bash
+# プロジェクトで起動
+cd ~/my-flutter-app
+claude-code
+
+# 対話例
+You: カウンターアプリにリセットボタンを追加して
+Claude: わかりました。main.dartを編集してリセットボタンを追加します...
+[ファイルが編集される]
+
+You: flutter run で動かして
+Claude: flutter runを実行します...
+[アプリが起動]
+
+# その場で確認・修正が可能
+```
+
+#### GitHub連携版の例：
 
 ```
 作業ディレクトリ: /home/user/cookbook
@@ -201,17 +259,20 @@ git checkout claude/github-todo-guidelines-xxxxx
 # または GitHub上でPRを確認
 ```
 
-### 4-5. CursorとClaude Codeの使い分け
+### 4-5. 各ツールの使い分け
 
-| ツール | 用途 | リアルタイム編集 | GitHub連携 |
-|--------|------|----------------|-----------|
-| **Cursor** | ローカル開発 | ⭐⭐⭐ | 手動 |
-| **Claude Code** | リモート/PR開発 | - | ⭐⭐⭐ |
+| ツール | 用途 | ローカル実行 | GitHub連携 | GUI/CLI |
+|--------|------|------------|-----------|---------|
+| **Cursor** | ローカル開発（GUI） | ⭐⭐⭐ | 手動 | GUI |
+| **Claude Code（CLI版）** | ローカル開発（CLI） | ⭐⭐⭐ | 手動 | CLI |
+| **Claude Code（GitHub連携版）** | リモート/PR開発 | - | ⭐⭐⭐ | Web |
 
 **推奨：**
-- **日常開発:** Cursor（ローカル環境で即座に実行）
-- **GitHub Issue対応:** Claude Code（ブランチ管理が明確）
-- **レビュー依頼:** Claude Code（PRベースで共有）
+- **日常開発（GUI好き）:** Cursor（ローカル環境で即座に実行）
+- **日常開発（CLI好き）:** Claude Code CLI版（ターミナルから対話）
+- **GitHub Issue対応:** Claude Code GitHub連携版（ブランチ管理が明確）
+- **レビュー依頼:** Claude Code GitHub連携版（PRベースで共有）
+- **併用パターン:** Cursor + Claude Code CLI版（両方使い分け）
 
 ## 5. Google Antigravity について
 
@@ -275,10 +336,17 @@ Flutter プロジェクト
 これで、あなたの開発環境(キッチン)には、強力なAI開発ツールが揃いました。
 
 **最適な構成:**
-- **メイン開発環境:** Cursor + Claude Sonnet 4.5
-- **GitHub連携開発:** Claude Code（リモート/PR開発）
+- **メイン開発環境:** Cursor + Claude Sonnet 4.5（GUI派）
+- **ターミナル開発:** Claude Code CLI版（CLI派）
+- **GitHub連携開発:** Claude Code GitHub連携版（リモート/PR開発）
 - **補完的な相談:** Web版AIチャット（Claude、ChatGPT）
 - **避けるべき:** Geminiでのコード生成、不安定なAntigravity（現時点）
+
+**開発スタイル別の推奨:**
+- **GUI好き:** Cursor
+- **CLI好き:** Claude Code CLI版
+- **両方使いたい:** Cursor + Claude Code CLI版を併用
+- **チーム開発:** Claude Code GitHub連携版でPR管理
 
 この構成は、プログラミング学習において、あなたの成長を強力にサポートしてくれます。分からないことを恐れずに、どんどんAIに質問してみましょう。
 
