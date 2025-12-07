@@ -33,8 +33,8 @@
 ## 📖 このCookbookで学べること
 
 *   **新しい学習スタイル:** AIを「24時間付き合ってくれる家庭教師」として、Flutterの基本概念から実践的な開発プロセスまでを学ぶ方法。
-*   **AIとの対話術:** GitHub Copilot, Google AI Studio, ChatGPTから、意図通りのコードやアイデアを引き出すための具体的なプロンプト技術。
-*   **モダンな開発ワークフロー:** 状態管理（Riverpod）、CI/CD（GitHub Actions）など、現代的なアプリ開発に不可欠な技術を、AIの助けを借りて効率的に実装する手順。
+*   **AIとの対話術:** Cursor, Claude Code, ChatGPTから、意図通りのコードやアイデアを引き出すための具体的なプロンプト技術と開発ワークフロー。
+*   **モダンな開発ワークフロー:** Cursor + Claudeを使った効率的な開発、Flutterの標準機能を活かしたシンプルな状態管理、CI/CD（GitHub Actions）など、現代的なアプリ開発に不可欠な技術を、AIの助けを借りて効率的に実装する手順。
 *   **実践的なトラブルシューティング:** 誰もが遭遇するエラーの原因を理解し、AIと共に解決していくための具体的な手法。
 
 ## 🗺️ レシピ一覧 (Table of Contents)
@@ -47,7 +47,7 @@
 *開発を始めるための全ての準備を整えます。*
 
 *   [#1-1: Flutter開発環境の準備](docs/01_the_kitchen/01_setting_up_flutter.md)
-*   [#1-2: AI開発ツールの導入（AIという名の教師）](docs/01_the_kitchen/02_ai_development_tools.md)
+*   [#1-2: AI開発ツールの導入 - Cursor, Claude, Claude Code](docs/01_the_kitchen/02_ai_development_tools.md)
 *   [#1-3: 最初のFlutterアプリ作成とプロジェクト探検](docs/01_the_kitchen/03_creating_first_app.md)
 *   [#1-4: アプリのIDとアセットの準備](docs/01_the_kitchen/04_project_identity_and_assets.md)
 *   [#1-5: 自分のプロジェクトをGitHubで管理する](docs/01_the_kitchen/05_managing_project_with_github.md)
@@ -83,16 +83,16 @@
 ---
 
 ### sección 4: 🌶️ 秘伝のソース (Secret Sauce Recipes)
-*特定のタスクに特化した、AIの能力を最大限に引き出すプロンプト技術集。*
+*Cursor + Claudeを使った実践的な開発パターンとベストプラクティス。*
 
-*   [#4-1: AIとの対話を強化するJSON活用術](docs/04_secret_sauce_recipes/01_ai_communication_with_json.md)
-*   [#4-2: AI駆動UI開発 - アイデアからコードへ](docs/04_secret_sauce_recipes/02_ai_driven_ui_generation.md)
-*   [#4-3: AIによるロジックと状態管理の実装](docs/04_secret_sauce_recipes/03_implementing_logic_with_ai.md)   
-*   [#4-4: AIによるリファクタリングとテストコード生成](docs/04_secret_sauce_recipes/04_refactoring_and_testing_with_ai.md)
-*   [#4-5: AIによるドキュメンテーションとエラー解析](docs/04_secret_sauce_recipes/05_documentation_and_error_analysis_with_ai.md)
-*   [#4-6: AIによるアプリの多言語対応（国際化）](docs/04_secret_sauce_recipes/06_translating_app_with_ai.md)
-*   [#4-7: AIによるパフォーマンス最適化](docs/04_secret_sauce_recipes/07_optimizing_performance_with_ai.md/)
-*   [#4-8: AIと描くCustomPainter - 数学をコードに](docs/04_secret_sauce_recipes/08_writing_custom_painter_with_ai.md)
+*   [#4-1: Cursorを使った効率的な開発ワークフロー](docs/04_secret_sauce_recipes/01_cursor_workflow.md)
+*   [#4-2: なぜRiverpodを避けるべきか - 個人開発 × AI時代の状態管理](docs/04_secret_sauce_recipes/02_why_avoid_riverpod.md)
+*   [#4-3: 自己完結型Widgetパターン](docs/04_secret_sauce_recipes/03_self_contained_widget_pattern.md)
+*   [#4-4: Serviceクラスパターン - ビジネスロジックの分離](docs/04_secret_sauce_recipes/04_service_class_pattern.md)
+*   [#4-5: Cursor + Claudeでシンプルなアプリを作る（メモアプリ）](docs/04_secret_sauce_recipes/05_building_simple_app.md)
+*   [#4-6: Google Antigravityを試す（注意点付き）](docs/04_secret_sauce_recipes/06_antigravity_with_cautions.md)
+*   [#4-7: 実践 - Cursorで完全なTODOアプリを作る](docs/04_secret_sauce_recipes/07_building_todo_app.md)
+*   [#4-8: 実践 - APIを使ったニュースアプリを作る](docs/04_secret_sauce_recipes/08_building_api_app.md)
 
 ---
 
