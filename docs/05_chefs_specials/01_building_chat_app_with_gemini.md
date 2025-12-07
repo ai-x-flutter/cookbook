@@ -1,99 +1,363 @@
-# ケーススタディ#5-1: Gemini APIでチャットアプリを作る
+# ケーススタディ#5-1: AIチャットアプリを作る - Claude API / Gemini API連携
 
-このケーススタディでは、これまでに学んだすべての知識を総動員し、**Googleの最新AIモデルであるGeminiとリアルタイムで対話できる、本格的なチャットアプリ**をゼロから作り上げます。
+## このケーススタディで作るもの
 
-AIにコードを書かせるだけでなく、**アプリの機能としてAIを組み込む**、まさに「AI x Flutter」を体現するプロジェクトです。
+**Cursor + Claude**を使って、Claude APIまたはGemini APIと連携する本格的なAIチャットアプリを作ります。
+
+**機能:**
+- ✅ AIとのリアルタイム対話
+- ✅ ストリーミングレスポンス（文字が順次表示される）
+- ✅ チャット履歴の表示
+- ✅ メッセージの送信・受信
+- ✅ ローディング状態の管理
+
+**技術スタック:**
+- Flutter 3.27+
+- StatefulWidget（状態管理）
+- Serviceクラス（API通信）
+- Claude API または Gemini API
+- http パッケージ
+
+**避けるもの:**
+- ❌ Riverpod
+- ❌ BLoC
+- ❌ 複雑な状態管理ライブラリ
 
 ## 完成イメージ
 
-*   ユーザーがメッセージを入力して送信すると、Gemini APIからの返信がストリーミングで表示される。
-*   チャット履歴はスクロール可能。
-*   送信中のメッセージはローディングインジケーターが表示される。
+```
+┌─────────────────────────┐
+│  AI Chat App            │
+├─────────────────────────┤
+│                         │
+│  👤 こんにちは         │
+│                         │
+│         🤖 こんにちは！│
+│         どうされました│
+│         か？           │
+│                         │
+│  👤 Flutterについて    │
+│     教えて            │
+│                         │
+│         🤖 Flutterは... │
+│         [ストリーミング]│
+│                         │
+├─────────────────────────┤
+│ [メッセージ入力欄] [送信]│
+└─────────────────────────┘
+```
 
-![チャットアプリ完成イメージ](https://storage.googleapis.com/cms-storage-bucket/images/Google_for_Developers_-_Blog_-_An.width-1500.png)
-*(Image credit: Google for Developers Blog)*
+## Step 1: API選択とセットアップ
 
-## Step 1: プロジェクトのセットアップとAIとの設計相談
+### Option A: Claude API（推奨）
 
-まずは、新しいFlutterプロジェクトを作成し、このアプリに必要な設計をAIに相談します。
+**特徴:**
+- 最も安定したコード生成・対話
+- 長文の理解に強い
+- 日本語の品質が高い
 
-> **🤖 AI活用プロンプト (プロジェクト設計)**
->
-> あなたはFlutterとFirebase、そしてGoogle AIに精通したシニア開発者です。
-> これから、GoogleのGemini APIとリアルタイムで対話できるチャットアプリを作ります。
->
-> **要件:**
-> - UIは、メッセージのリストと、下部のテキスト入力欄で構成される、一般的なチャットUI。
-> - 状態管理には**Riverpod**を使用する。
-> - Gemini APIとの通信には、Google公式の`google_generative_ai`パッケージを使用する。
->
-> **質問:**
-> 1.  このアプリに必要な、**シンプルで分かりやすいディレクトリ構成**を提案してください。
-> 2.  `pubspec.yaml`に追加すべき**主要なパッケージ**をリストアップしてください。
-> 3.  チャットのメッセージ一件を表す`ChatMessage`モデルクラスは、どのようなプロパティを持つべきですか？具体的なコードを提示してください。
+**セットアップ:**
+1. [Anthropic Console](https://console.anthropic.com/)でアカウント作成
+2. API Keyを取得
+3. 無料枠: $5 相当
 
-この対話を通じて、プロジェクトの骨格と、`google_generative_ai`や`flutter_riverpod`といった必要なパッケージを決定します。
+### Option B: Gemini API
 
-## Step 2: Gemini APIキーの取得と設定
+**特徴:**
+- Googleの最新AIモデル
+- 無料枠が大きい
+- 画像認識も可能
 
-Gemini APIを利用するには、APIキーが必要です。
+**セットアップ:**
+1. [Google AI Studio](https://aistudio.google.com/)でAPI Key取得
+2. 無料枠: 月60リクエスト/分
 
-1.  [Google AI Studio](https://aistudio.google.com/)にアクセスします。
-2.  左側のメニューから「**Get API key**」をクリックし、新しいAPIキーを作成します。
-3.  生成されたAPIキーをコピーします。**このキーは絶対に公開リポジトリなどにコミットしないでください。**
+## Step 2: プロジェクト作成
 
-このAPIキーを安全にアプリに組み込むため、**`dart-define`**という手法を使います。
+```bash
+flutter create ai_chat_app
+cd ai_chat_app
+cursor .
+```
 
-> **🤖 AI活用プロンプト (dart-defineの使い方)**
->
-> Flutterアプリで、APIキーのような機密情報を安全に扱うためのベストプラクティスを教えてください。
->
-> `dart-define`を使って、ビルド時にAPIキーを環境変数として埋め込む方法について、具体的なコマンド例と、Dartコード内からその値を取得する方法を説明してください。
+### 依存関係を追加
 
-AIの助けを借りて、`--dart-define=GEMINI_API_KEY=あなたのAPIキー` のようにしてアプリを実行し、コード内からは `String.fromEnvironment('GEMINI_API_KEY')` で安全にキーを取得する方法を学びます。
+**Cursorで以下をリクエスト:**
 
-## Step 3: UIの構築
+```
+pubspec.yamlに以下の依存関係を追加してください：
+- http: ^1.2.0
+- flutter_dotenv: ^5.1.0（APIキー管理用）
+```
 
-次に、チャットのUIをAIと協力して構築します。`ListView`でチャット履歴を表示し、下部に`TextField`と送信ボタンを配置する、という典型的なレイアウトです。
+**.envファイルの作成:**
 
-> **🤖 AI活用プロンプト (チャットUI作成)**
->
-> あなたはFlutterのUI構築エキスパートです。
->
-> 以下の要件を満たす、チャット画面のUIウィジェットを作成してください。
->
-> **要件:**
-> 1.  `ListView.builder`を使って、メッセージのリストを表示する。リストは逆順（`reverse: true`）に表示し、新しいメッセージが下に来るようにする。
-> 2.  各メッセージは、送信者がユーザーかモデル（AI）かによって、背景色や配置（右寄せ/左寄せ）が変わるようにする。
-> 3.  画面下部に、`TextField`と`IconButton`（送信ボタン）を`Row`で配置する。
-> 4.  テキスト入力中は、送信ボタンを有効化する。
+```
+プロジェクトルートに.envファイルを作成して、以下を追加してください：
 
-## Step 4: Gemini APIとの通信ロジックの実装
+# Claude APIの場合
+ANTHROPIC_API_KEY=your_api_key_here
 
-いよいよ、このアプリの心臓部である、Gemini APIとの通信ロジックを実装します。Geminiは、一文字ずつ応答を返す**ストリーミング**に対応しているため、これを活用してリアルタイム感を演出します。
+# または Gemini APIの場合
+GEMINI_API_KEY=your_api_key_here
+```
 
-> **🤖 AI活用プロンプト (Gemini API連携)**
->
-> `google_generative_ai`パッケージを使って、Gemini Proモデルとのストリーミングチャットを実装するロジックを作成してください。
->
-> **要件:**
-> 1.  `GenerativeModel`を初期化する。APIキーは`dart-define`から取得する。
-> 2.  過去のチャット履歴と、新しいユーザーメッセージを元に、`generateContentStream`メソッドを呼び出す。
-> 3.  Streamから応答が少しずつ返ってくるたびに、UIの状態（表示するメッセージ）を更新する。
-> 4.  このロジックを、Riverpodの`Notifier`クラス内に実装してください。ユーザーがメッセージを送信する`sendMessage`メソッドとして定義してください。
+**重要:** `.gitignore`に`.env`を追加（APIキーをGitにコミットしない）
 
-このプロンプトにより、非同期処理であるStreamをRiverpodで扱う、高度で実践的なコードが生成されます。AIは、Streamの`listen`の仕方や、状態の更新方法など、複雑な部分をすべて担当してくれます。
+## Step 3: データモデルの設計
 
-## Step 5: 全体の結合と微調整
+**Cursorで以下をリクエスト:**
 
-最後に、UIとロジックを接続し、細かい部分を調整していきます。
+```
+lib/models/message.dartを作成して、以下の仕様でMessageクラスを作ってください：
 
-*   送信ボタンが押されたら、Riverpodの`sendMessage`メソッドを呼び出す。
-*   APIからの応答を待っている間、ローディングインジケーターを表示する。
-*   メッセージの表示が更新されたら、`ListView`を一番下まで自動でスクロールさせる。
+クラス名: Message
+フィールド:
+- id: String（メッセージのユニークID）
+- text: String（メッセージ本文）
+- isUser: bool（ユーザーのメッセージかAIのメッセージか）
+- timestamp: DateTime（送信時刻）
 
-これらの「最後の仕上げ」も、AIに「`ScrollController`を使って、リストが更新されたら一番下までスクロールする方法を教えて」のように質問することで、一つずつ解決していくことができます。
+メソッド:
+- toJson() / fromJson()（JSONシリアライズ）
+- copyWith()（不変オブジェクト更新用）
+```
+
+## Step 4: API Serviceクラスの実装
+
+### Claude APIの場合
+
+**Cursorで以下をリクエスト:**
+
+```
+lib/services/claude_service.dartを作成してください。
+
+仕様:
+- シングルトンパターン
+- Claude APIのMessages APIを使用
+- ストリーミングレスポンス対応
+- エラーハンドリング
+
+メソッド:
+Future<Stream<String>> sendMessage(String message, List<Message> history)
+  - 引数: ユーザーメッセージとチャット履歴
+  - 戻り値: ストリーミングレスポンス（Stream<String>）
+  - APIエンドポイント: https://api.anthropic.com/v1/messages
+  - モデル: claude-3-5-sonnet-20241022
+  - ヘッダー:
+    - x-api-key: APIキー
+    - anthropic-version: 2023-06-01
+    - content-type: application/json
+```
+
+### Gemini APIの場合
+
+**Cursorで以下をリクエスト:**
+
+```
+lib/services/gemini_service.dartを作成してください。
+
+仕様:
+- シングルトンパターン
+- Gemini APIのgenerateContent APIを使用
+- ストリーミングレスポンス対応
+
+メソッド:
+Future<Stream<String>> sendMessage(String message, List<Message> history)
+  - エンドポイント: https://generativelanguage.googleapis.com/v1/models/gemini-pro:streamGenerateContent
+  - パラメータにAPI Key
+```
+
+## Step 5: チャット画面UIの実装
+
+**Cursorで以下をリクエスト:**
+
+```
+lib/screens/chat_screen.dartを作成してください。
+
+仕様:
+- StatefulWidgetを使用
+- Scaffoldベース
+- AppBarにタイトル「AI Chat」
+- メッセージリスト（ListView.builder）
+  - ユーザーメッセージは右寄せ（青色背景）
+  - AIメッセージは左寄せ（グレー背景）
+  - 時刻表示
+- 下部にメッセージ入力欄とボタン
+- 送信ボタンを押すとAPIにリクエスト
+- ストリーミングレスポンスを1文字ずつ表示
+- スクロールは自動で最下部へ
+
+状態:
+- List<Message> _messages（メッセージ履歴）
+- TextEditingController _controller（入力欄）
+- bool _isLoading（送信中フラグ）
+- String _streamingText（ストリーミング中のテキスト）
+```
+
+## Step 6: ストリーミング表示の実装
+
+**重要なポイント:**
+
+```dart
+// ストリーミングレスポンスの処理例
+Future<void> _sendMessage() async {
+  if (_controller.text.isEmpty) return;
+
+  final userMessage = Message(
+    id: DateTime.now().toString(),
+    text: _controller.text,
+    isUser: true,
+    timestamp: DateTime.now(),
+  );
+
+  setState(() {
+    _messages.add(userMessage);
+    _isLoading = true;
+    _streamingText = '';
+  });
+
+  _controller.clear();
+
+  try {
+    final stream = await ClaudeService.instance.sendMessage(
+      userMessage.text,
+      _messages,
+    );
+
+    await for (final chunk in stream) {
+      if (mounted) {
+        setState(() {
+          _streamingText += chunk;
+        });
+      }
+    }
+
+    // ストリーミング完了後、メッセージに追加
+    final aiMessage = Message(
+      id: DateTime.now().toString(),
+      text: _streamingText,
+      isUser: false,
+      timestamp: DateTime.now(),
+    );
+
+    setState(() {
+      _messages.add(aiMessage);
+      _streamingText = '';
+      _isLoading = false;
+    });
+  } catch (e) {
+    // エラーハンドリング
+    setState(() {
+      _isLoading = false;
+    });
+  }
+}
+```
+
+## Step 7: 実行とテスト
+
+```bash
+# .envファイルにAPIキーが設定されているか確認
+flutter run
+```
+
+**テストシナリオ:**
+1. メッセージを送信
+2. ストリーミングレスポンスが表示されるか確認
+3. チャット履歴が正しく表示されるか確認
+4. スクロールが自動で最下部になるか確認
+5. エラーハンドリングが機能するか確認
+
+## Step 8: 機能拡張
+
+**Cursorで以下を追加リクエスト:**
+
+### 拡張1: チャット履歴の永続化
+
+```
+SharedPreferencesを使って、チャット履歴をローカルに保存してください。
+アプリを再起動しても履歴が残るようにしてください。
+```
+
+### 拡張2: チャット履歴のクリア
+
+```
+AppBarにクリアボタンを追加して、チャット履歴を全削除できるようにしてください。
+確認ダイアログも表示してください。
+```
+
+### 拡張3: システムプロンプトのカスタマイズ
+
+```
+設定画面を追加して、AIのキャラクター（システムプロンプト）を
+カスタマイズできるようにしてください。
+
+例:
+- フレンドリーなアシスタント
+- 厳格な教師
+- カジュアルな友達
+```
+
+### 拡張4: コードブロックのシンタックスハイライト
+
+```
+flutter_markdown パッケージを使って、AIの返答内のコードブロックを
+シンタックスハイライト表示してください。
+```
+
+## よくある問題と解決策
+
+### 問題1: ストリーミングが機能しない
+
+**原因:** APIのストリーミングエンドポイントが正しくない
+
+**解決策:**
+- Claude: `stream: true`パラメータを確認
+- Gemini: `:streamGenerateContent`エンドポイントを使用
+
+### 問題2: APIキーエラー
+
+**原因:** `.env`ファイルが読み込まれていない
+
+**解決策:**
+```dart
+// main.dartで確実に読み込む
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+Future<void> main() async {
+  await dotenv.load(fileName: ".env");
+  runApp(MyApp());
+}
+```
+
+### 問題3: 日本語が文字化けする
+
+**原因:** UTF-8エンコーディングの問題
+
+**解決策:**
+```dart
+// httpリクエストのヘッダーに追加
+headers: {
+  'Content-Type': 'application/json; charset=utf-8',
+}
+```
+
+## まとめ
+
+このケーススタディで学んだこと：
+
+✅ **API連携の基本:** REST APIの呼び出しとエラーハンドリング
+✅ **ストリーミング処理:** Stream<String>を使ったリアルタイム表示
+✅ **状態管理:** StatefulWidgetでの複雑な状態管理
+✅ **セキュリティ:** APIキーの安全な管理
+✅ **UX設計:** チャットUIのベストプラクティス
+
+**次のステップ:**
+- 画像送信機能の追加（Gemini Vision）
+- 音声入力/出力機能
+- マルチモーダル対話
 
 ---
 
-おめでとうございます！あなたは、AIと協力して、AIそのものを活用したインタラクティブなアプリケーションを完成させました。このケーススタディを通じて学んだ「AIとの共同開発プロセス」は、今後あなたが作るあらゆるアプリに応用できる、強力な武器となるでしょう。
+**完成版コードは、[examples/ai_chat_app](../../examples/ai_chat_app/)を参照してください。**
