@@ -97,11 +97,11 @@
 ---
 
 ### sección 5: 🌟 シェフの特別料理 (Chef's Specials)
-*具体的なアプリをテーマに、ゼロから完成までを追うケーススタディ集。*
+*Cursor + Claudeで作る、高度な機能を持つ実用的なアプリのケーススタディ集。*
 
-*   [#5-1: Gemini APIでチャットアプリを作る](docs/05_chefs_specials/01_building_chat_app_with_gemini.md)
-*   [#5-2: REST APIでニュースアプリを作る](docs/05_chefs_specials/02_building_news_app_with_rest_api.md)
-*   [#5-3: オンデバイスAIで画像認識アプリを作る (TFLite)](docs/05_chefs_specials/03_building_on_device_ai_app_with_tflite.md)
+*   [#5-1: AIチャットアプリを作る - Claude API / Gemini API連携](docs/05_chefs_specials/01_building_chat_app_with_gemini.md)
+*   [#5-2: 画像認識カメラアプリを作る - ML Kit / TFLite活用](docs/05_chefs_specials/02_building_image_recognition_app.md)
+*   [#5-3: リアルタイム共有メモアプリを作る - Supabase Realtime](docs/05_chefs_specials/03_building_realtime_app.md)
 
 ---
 
