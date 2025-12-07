@@ -28,9 +28,9 @@ cd my_app
 cursor .
 ```
 
-3. Cursorで**Claude Sonnet 4.5**をメインモデルに設定
+3. Cursorで**Claude Opus 4.5**をメインモデルに設定
 
-（CursorのAIモデル設定から選択）
+（CursorのAIモデル設定から選択。簡易タスクにはSonnet 4.5も活用）
 
 ---
 
