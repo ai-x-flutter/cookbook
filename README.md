@@ -140,6 +140,7 @@ AIとの協働でアプリを開発する中で、もう一つ重要な気づき
 *   [#7-1: `Could not read workspace metadata` エラーを解決する](docs/07_troubleshooting/01_fix_gradle_metadata_error.md)
 *   [#7-2: Flutterビルドエラー上級編](docs/07_troubleshooting/02_advanced_build_troubleshooting.md)
 *   [#7-3: `Null check operator used on a null value`エラーを理解する](docs/07_troubleshooting/03_understanding_null_safety_errors.md)
+*   [#7-4: AIとの開発で起こる典型的なトラブルと対処法](docs/07_troubleshooting/04_ai_development_troubleshooting.md)
 
 ---
 
