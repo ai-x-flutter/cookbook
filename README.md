@@ -66,9 +66,10 @@ AIとの協働でアプリを開発する中で、もう一つ重要な気づき
 *   [#1-1: Flutter開発環境の準備](docs/01_the_kitchen/01_setting_up_flutter.md)
 *   [#1-2: AI開発ツールの導入 - Cursor, Claude, Claude Code](docs/01_the_kitchen/02_ai_development_tools.md)
 *   [#1-3: 最初のFlutterアプリ作成とプロジェクト探検](docs/01_the_kitchen/03_creating_first_app.md)
-*   [#1-4: アプリのIDとアセットの準備](docs/01_the_kitchen/04_project_identity_and_assets.md)
-*   [#1-5: 自分のプロジェクトをGitHubで管理する](docs/01_the_kitchen/05_managing_project_with_github.md)
-*   [#1-6: GitHub CLIでPCを認証する](docs/01_the_kitchen/06_authenticating_with_github_cli.md)
+*   [#1-4: iOS開発の準備とセットアップ](docs/01_the_kitchen/04_ios_development_setup.md)
+*   [#1-5: アプリのIDとアセットの準備](docs/01_the_kitchen/05_project_identity_and_assets.md)
+*   [#1-6: 自分のプロジェクトをGitHubで管理する](docs/01_the_kitchen/06_managing_project_with_github.md)
+*   [#1-7: GitHub CLIでPCを認証する](docs/01_the_kitchen/07_authenticating_with_github_cli.md)
 
 ---
 
@@ -140,6 +141,7 @@ AIとの協働でアプリを開発する中で、もう一つ重要な気づき
 *   [#7-1: `Could not read workspace metadata` エラーを解決する](docs/07_troubleshooting/01_fix_gradle_metadata_error.md)
 *   [#7-2: Flutterビルドエラー上級編](docs/07_troubleshooting/02_advanced_build_troubleshooting.md)
 *   [#7-3: `Null check operator used on a null value`エラーを理解する](docs/07_troubleshooting/03_understanding_null_safety_errors.md)
+*   [#7-4: AIとの開発で起こる典型的なトラブルと対処法](docs/07_troubleshooting/04_ai_development_troubleshooting.md)
 
 ---
 
