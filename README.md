@@ -119,6 +119,9 @@ AIとの協働でアプリを開発する中で、もう一つ重要な気づき
 *   [#5-1: AIチャットアプリを作る - Claude API / Gemini API連携](docs/05_chefs_specials/01_building_chat_app_with_gemini.md)
 *   [#5-2: 画像認識カメラアプリを作る - ML Kit / TFLite活用](docs/05_chefs_specials/02_building_image_recognition_app.md)
 *   [#5-3: リアルタイム共有メモアプリを作る - Supabase Realtime](docs/05_chefs_specials/03_building_realtime_app.md)
+*   [#5-4: レスポンシブデザインの基礎 - あらゆる画面サイズに対応する](docs/05_chefs_specials/04_responsive_design_basics.md)
+*   [#5-5: デスクトップアプリを作る - Windows / macOS / Linux対応](docs/05_chefs_specials/05_building_desktop_app.md)
+*   [#5-6: Webアプリを作る - ブラウザで動くFlutterアプリ](docs/05_chefs_specials/06_building_web_app.md)
 
 ---
 
