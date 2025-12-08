@@ -67,9 +67,9 @@ AIとの協働でアプリを開発する中で、もう一つ重要な気づき
 *   [#1-2: AI開発ツールの導入 - Cursor, Claude, Claude Code](docs/01_the_kitchen/02_ai_development_tools.md)
 *   [#1-3: 最初のFlutterアプリ作成とプロジェクト探検](docs/01_the_kitchen/03_creating_first_app.md)
 *   [#1-4: iOS開発の準備とセットアップ](docs/01_the_kitchen/04_ios_development_setup.md)
-*   [#1-5: アプリのIDとアセットの準備](docs/01_the_kitchen/05_project_identity_and_assets.md)
-*   [#1-6: 自分のプロジェクトをGitHubで管理する](docs/01_the_kitchen/06_managing_project_with_github.md)
-*   [#1-7: GitHub CLIでPCを認証する](docs/01_the_kitchen/07_authenticating_with_github_cli.md)
+*   [#1-5: アプリのIDとアセットの準備](docs/01_the_kitchen/04_project_identity_and_assets.md)
+*   [#1-6: 自分のプロジェクトをGitHubで管理する](docs/01_the_kitchen/05_managing_project_with_github.md)
+*   [#1-7: GitHub CLIでPCを認証する](docs/01_the_kitchen/06_authenticating_with_github_cli.md)
 
 ---
 
