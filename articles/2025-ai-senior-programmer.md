@@ -84,7 +84,7 @@ The method 'setState' isn't defined for the class 'MyWidget'
 | **Claude Opus 4.5** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | 最高峰の理解力、複雑な実装に最適 |
 | **Claude Sonnet 4.5** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | 高速で安定、簡易タスクに最適 |
 | ChatGPT GPT-5.1 | ⭐⭐⭐⭐ | ⭐⭐⭐ | 速度は速いが最新Flutter機能に弱い |
-| Gemini 3 Pro | ⭐⭐ | ⭐ | アイデア出しは強いが実装は不安定 |
+| Gemini 2.0 Flash Thinking | ⭐⭐ | ⭐⭐⭐⭐ | 高速で強力だが、実装の安定性に課題 |
 
 ### Cursor + Claudeの実際
 
