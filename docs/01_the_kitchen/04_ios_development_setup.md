@@ -364,7 +364,7 @@ Cursor Chat（Ctrl+L）で：
 
 iOS開発環境が整ったので、次はアプリのIDとアセット（アイコン、名前など）を設定しましょう。
 
-➡️ **次のレシピへ:** [#1-5: アプリのIDとアセットの準備](./04_project_identity_and_assets.md)
+➡️ **次のレシピへ:** [#1-5: アプリのIDとアセットの準備](./05_project_identity_and_assets.md)
 
 ---
 
