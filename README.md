@@ -111,6 +111,7 @@ AIとの協働でアプリを開発する中で、もう一つ重要な気づき
 *   [#4-6: Google Antigravityを試す（注意点付き）](docs/04_secret_sauce_recipes/06_antigravity_with_cautions.md)
 *   [#4-7: 実践 - Cursorで完全なTODOアプリを作る](docs/04_secret_sauce_recipes/07_building_todo_app.md)
 *   [#4-8: 実践 - APIを使ったニュースアプリを作る](docs/04_secret_sauce_recipes/08_building_api_app.md)
+*   [#4-9: AIのトークン消費を抑える実践テクニック](docs/04_secret_sauce_recipes/09_reducing_token_consumption.md)
 
 ---
 
