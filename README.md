@@ -124,6 +124,7 @@ AIとの協働でアプリを開発する中で、もう一つ重要な気づき
 *   [#5-4: レスポンシブデザインの基礎 - あらゆる画面サイズに対応する](docs/05_chefs_specials/04_responsive_design_basics.md)
 *   [#5-5: デスクトップアプリを作る - Windows / macOS / Linux対応](docs/05_chefs_specials/05_building_desktop_app.md)
 *   [#5-6: Webアプリを作る - ブラウザで動くFlutterアプリ](docs/05_chefs_specials/06_building_web_app.md)
+*   [#5-7: テキストサイズ変更への対応 - ダッシュボードとアクセシビリティ](docs/05_chefs_specials/07_handling_text_size_changes.md)
 
 ---
 
