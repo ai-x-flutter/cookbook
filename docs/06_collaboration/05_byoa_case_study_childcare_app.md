@@ -322,43 +322,47 @@ Pull Request: 「この改善、試してみてください」
 | Gemini Advanced | 2,900円 | ✅ | ✅ | ❌ | APIは別料金 |
 | Gemini API | 従量 | ❌ | ❌ | ✅ | 使いすぎ不安 |
 
-### ChatGPT・Geminiの「開発プラットフォーム独占」競争
+### 各社のビジネス戦略の違い
 
-ChatGPTとGeminiは、開発者を自分のプラットフォームに囲い込む戦略を取っています：
+それぞれのAIサービスには、異なるビジネス戦略があります：
 
 ```
-【ChatGPT（OpenAI）の戦略】
-ChatGPT Plus（月3,100円）: Webチャットのみ
-  ↓
-開発したいなら...
-  ↓
-ChatGPT API（従量課金）を別契約
-  ↓
-結果: 開発 + 相談で2つの契約、または従量課金の不安
+【ChatGPT（OpenAI / Microsoft）】
+- ChatGPT Plus: 定額でWebチャット
+- ChatGPT API: 別契約（従量課金）
+- 背景: Azure、GitHub、Office等の巨大エコシステム
+- 結果: 定額サービスとAPIは分離
 
-【Gemini（Google）の戦略】
-Gemini Advanced（月2,900円）: Webチャットのみ
-  ↓
-APIを使いたいなら...
-  ↓
-Gemini API（従量課金）を別契約
-  ↓
-結果: 同様に2つの契約、または従量課金の不安
+【Gemini（Google）】
+- Gemini Advanced: 定額でWebチャット
+- Gemini API: 別契約（従量課金）
+- 背景: Google Cloud、Android、Chrome等の巨大プラットフォーム
+- 結果: 定額サービスとAPIは分離
+
+【Claude（Anthropic）】
+- Claude Pro: 定額でWeb + API両方
+- 背景: AIモデル開発に特化、大規模プラットフォームなし
+- 結果: シンプルな料金体系、開発者に使いやすく
 ```
 
-**なぜこれが家庭利用で問題になるか:**
-- ❌ 開発時の相談: ChatGPT Plus / Gemini Advanced（定額）
-- ❌ アプリ内でのAPI利用: 別途従量課金契約が必要
-- ❌ 結果: 月額が予測できない、または2つの契約管理
-- ❌ 家計管理が複雑、使いすぎの不安
+**家庭利用での実際の影響:**
 
-**Claude Proが唯一の例外:**
-- ✅ 開発時の相談: Claude Pro（Webチャット）
-- ✅ アプリ内のAPI: 同じClaude Pro契約で使える
-- ✅ 結果: 1つの契約、定額で安心
-- ✅ 家計管理がシンプル
+ChatGPT/Geminiを使う場合：
+- 開発中の相談: 定額サービス（月3,000円前後）
+- アプリでのAPI利用: 従量課金に切り替え、または別契約
+- → 月額が予測できない、または2つの契約を管理
 
-→ **Claudeは開発者の囲い込みではなく、柔軟性を提供**
+Claudeを使う場合：
+- 開発中の相談: Claude Pro（Webチャット）
+- アプリでのAPI利用: 同じClaude Pro（定額のまま）
+- → 月額固定、契約管理がシンプル
+
+**どちらが良い・悪いではなく、「家庭利用の目的」に合うか:**
+
+ChatGPT/Gemini: 大規模エコシステムとの統合が強み
+Claude: シンプルで予測可能な料金体系が強み
+
+→ **育児アプリのような家庭利用では、定額で完結するClaude Proが適している**
 
 **家庭での育児支援アプリには、Claude Proが最適です。**
 
