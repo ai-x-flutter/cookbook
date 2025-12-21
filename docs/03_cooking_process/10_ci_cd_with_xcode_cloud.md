@@ -4,6 +4,8 @@ GitHub ActionsでiOSのCI/CDを実現する方法を学びましたが、Apple�
 
 このレシピでは、Appleが提供する**Xcode Cloud**を使って、iOSアプリのビルド、テスト、TestFlightへの配布までを自動化する方法を学びます。GitHub Actionsと違い、Xcode統合で設定でき、Appleのエコシステムとの相性が抜群です。
 
+> **参考:** このレシピは[Flutter公式ドキュメントのXcode Cloudガイド](https://docs.flutter.dev/deployment/cd#xcode-cloud)に基づいています。
+
 ## Xcode Cloudとは？
 
 **Xcode Cloud**は、Appleが提供するクラウドベースの継続的インテグレーション・継続的デリバリー（CI/CD）サービスです。Xcodeに直接統合されており、コードのビルド、テスト、配布を自動化できます。
@@ -126,7 +128,7 @@ Xcode Cloudが実行するアクションを定義します。
 
 Xcode CloudはFlutterプロジェクトを直接認識しませんが、**カスタムビルドスクリプト**を使ってFlutterのビルドプロセスを組み込むことができます。
 
-プロジェクトのルートに `ci_scripts` ディレクトリを作成し、その中に `ci_post_clone.sh` スクリプトを配置します。
+`ios/ci_scripts` ディレクトリを作成し、その中に `ci_post_clone.sh` スクリプトを配置します。このスクリプトは、Xcode Cloudがリポジトリをクローンした後に自動的に実行されます。
 
 ```bash
 mkdir -p ios/ci_scripts
@@ -137,39 +139,36 @@ mkdir -p ios/ci_scripts
 ```bash
 #!/bin/sh
 
-# Flutterのインストール確認と設定
-export PATH="$PATH:$HOME/.flutter/bin"
-
-# Flutterがインストールされていない場合はインストール
-if ! command -v flutter &> /dev/null
-then
-    echo "Flutter not found, installing..."
-    git clone https://github.com/flutter/flutter.git -b stable $HOME/.flutter
-    export PATH="$PATH:$HOME/.flutter/bin"
-fi
-
-# Flutter doctorで環境確認
-flutter doctor
-
-# 依存関係のインストール
+# デフォルトでは、このスクリプトの実行ディレクトリはci_scriptsディレクトリです
+# CI_WORKSPACEは、クローンされたリポジトリのディレクトリです
+echo "🟩 Navigate from ($PWD) to ($CI_WORKSPACE)"
 cd $CI_WORKSPACE
-flutter pub get
 
-# iOSビルドの準備
-cd ios
-pod install
+echo "🟩 Install Flutter"
+time git clone https://github.com/flutter/flutter.git -b stable $HOME/flutter
+export PATH="$PATH:$HOME/flutter/bin"
+
+echo "🟩 Flutter Precache"
+time flutter precache --ios
+
+echo "🟩 Install Flutter Dependencies"
+time flutter pub get
+
+echo "🟩 Install CocoaPods via Homebrew"
+time HOMEBREW_NO_AUTO_UPDATE=1 brew install cocoapods
+
+echo "🟩 Install CocoaPods dependencies..."
+time cd ios && pod install
+
+exit 0
 ```
 
-このスクリプトに実行権限を付与します。
+> **注意:** このスクリプトは、ビルド時間に約10分追加されます。
+
+スクリプトに実行権限を付与してコミット・プッシュします。
 
 ```bash
-chmod +x ios/ci_scripts/ci_post_clone.sh
-```
-
-変更をコミット・プッシュします。
-
-```bash
-git add ios/ci_scripts/ci_post_clone.sh
+git add ios/ci_scripts/ci_post_clone.sh --chmod=+x
 git commit -m "Add Xcode Cloud build script for Flutter"
 git push
 ```
@@ -268,3 +267,10 @@ Xcode Cloudを使うことで、以下が実現できました。
 Xcode CloudはAppleエコシステムとの統合に優れており、特にiOS専用のプロジェクトや、証明書管理の複雑さを避けたい場合に最適です。
 
 一方、AndroidとiOSを同じCI/CDで管理したい場合や、より高度なカスタマイズが必要な場合は、GitHub Actionsの方が適している場合もあります。プロジェクトのニーズに応じて、最適なCI/CDツールを選択しましょう！
+
+---
+
+## 参考リンク
+
+*   [Flutter公式ドキュメント - Continuous delivery with Flutter](https://docs.flutter.dev/deployment/cd#xcode-cloud)
+*   [Apple Developer - Xcode Cloud](https://developer.apple.com/xcode-cloud/)
