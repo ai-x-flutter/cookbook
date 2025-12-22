@@ -97,6 +97,7 @@ AIとの協働でアプリを開発する中で、もう一つ重要な気づき
 *   [#3-7: 手動でのリリースとストア公開](docs/03_cooking_process/07_manual_release_and_publication.md)
 *   [#3-8: Androidビルドの自動化 with GitHub Actions](docs/03_cooking_process/08_ci_cd_with_github_actions_android.md)
 *   [#3-9: iOSビルドの自動化 with GitHub Actions](docs/03_cooking_process/09_ci_cd_with_github_actions_ios.md)
+*   [#3-10: iOSビルドの自動化 with Xcode Cloud](docs/03_cooking_process/10_ci_cd_with_xcode_cloud.md)
 
 ---
 
@@ -136,6 +137,9 @@ AIとの協働でアプリを開発する中で、もう一つ重要な気づき
 *   [#6-1: 他の人のリポジトリをFork & Cloneする](docs/06_collaboration/01_fork_and_clone.md)
 *   [#6-2: Pull Requestで本家に貢献する](docs/06_collaboration/02_push_and_pull_request.md)
 *   [#6-3: マージコンフリクト（競合）を解決する](docs/06_collaboration/03_resolving_merge_conflicts.md)
+*   [#6-4: BYOA開発とは - 自分たちで課題を解決する新しい形](docs/06_collaboration/04_what_is_byoa_development.md)
+*   [#6-5: 【事例研究】育児・発達支援アプリをBYOAで開発する](docs/06_collaboration/05_byoa_case_study_childcare_app.md)
+*   [#6-6: 【事例研究】チャットだけで自分用のWebアプリを作る](docs/06_collaboration/06_byoa_case_study_dev_tools.md)
 
 #### BYOA開発 - 非開発者でもアプリが作れる時代
 *   [#6-4: BYOA開発とは - 自分たちで課題を解決する新しい形](docs/06_collaboration/04_what_is_byoa_development.md)
