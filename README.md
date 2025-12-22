@@ -82,6 +82,7 @@ AIとの協働でアプリを開発する中で、もう一つ重要な気づき
 *   [#2-3: 非同期プログラミング（Futureとasync/await）](docs/02_core_concepts/03_async_programming.md)
 *   [#2-4: 画面遷移の基本（Routing）](docs/02_core_concepts/04_introduction_to_routing.md)
 *   [#2-5: `BuildContext`とは何か？ - ウィジェットの「現在地」](docs/02_core_concepts/05_understanding_build_context.md)
+*   [#2-6: ゲーム開発で学ぶFlutterの基本的な考え方](docs/02_core_concepts/06_learning_through_game_development.md)
 
 ---
 
