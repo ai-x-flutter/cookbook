@@ -118,6 +118,7 @@ AIとの協働でアプリを開発する中で、もう一つ重要な気づき
 ### sección 5: 🌟 シェフの特別料理 (Chef's Specials)
 *Cursor + Claudeで作る、高度な機能を持つ実用的なアプリのケーススタディ集。*
 
+*   [#5-0: はじめに - PM的能力がある非開発者のための本格開発](docs/05_chefs_specials/00_introduction.md)
 *   [#5-1: AIチャットアプリを作る - Claude API / Gemini API連携](docs/05_chefs_specials/01_building_chat_app_with_gemini.md)
 *   [#5-2: 画像認識カメラアプリを作る - ML Kit / TFLite活用](docs/05_chefs_specials/02_building_image_recognition_app.md)
 *   [#5-3: リアルタイム共有メモアプリを作る - Supabase Realtime](docs/05_chefs_specials/03_building_realtime_app.md)
@@ -129,11 +130,22 @@ AIとの協働でアプリを開発する中で、もう一つ重要な気づき
 ---
 
 ### sección 6: 🤝 他のシェフとの協業 (Collaboration)
-*オープンソースへの貢献や、チーム開発で必要となるGitのスキルを学びます。*
+*オープンソースへの貢献、チーム開発、そしてBYOA開発（自分で課題を解決する新しい形）を学びます。*
 
+#### Git基礎とコラボレーション
 *   [#6-1: 他の人のリポジトリをFork & Cloneする](docs/06_collaboration/01_fork_and_clone.md)
 *   [#6-2: Pull Requestで本家に貢献する](docs/06_collaboration/02_push_and_pull_request.md)
 *   [#6-3: マージコンフリクト（競合）を解決する](docs/06_collaboration/03_resolving_merge_conflicts.md)
+
+#### BYOA開発 - 非開発者でもアプリが作れる時代
+*   [#6-4: BYOA開発とは - 自分たちで課題を解決する新しい形](docs/06_collaboration/04_what_is_byoa_development.md)
+*   [#6-5: 【事例研究】育児・発達支援アプリをBYOAで作る](docs/06_collaboration/05_byoa_case_study_childcare_app.md)
+*   [#6-6: チャットだけで自分用のWebアプリを作る](docs/06_collaboration/06_byoa_case_study_dev_tools.md)
+
+#### コラボレーションとMCPで進化させる
+*   [#6-7: コラボレーションでアプリを進化させる](docs/06_collaboration/07_evolve_with_collaboration.md)
+*   [#6-8: MCP（Model Context Protocol）でClaudeを拡張する](docs/06_collaboration/08_mcp_fundamentals.md)
+*   [#6-9: 実践的なMCP活用でBYOAアプリを進化させる](docs/06_collaboration/09_mcp_practical_applications.md)
 
 ---
 
