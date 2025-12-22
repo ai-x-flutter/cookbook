@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(const FallingBlockPuzzleApp());
@@ -156,13 +157,30 @@ class _GameScreenState extends State<GameScreen> {
   // ゲーム状態
   Timer? gameTimer;
   int score = 0;
+  int highScore = 0;
+  bool isNewHighScore = false;
   bool isGameOver = false;
   bool isPaused = false;
 
   @override
   void initState() {
     super.initState();
+    _loadHighScore();
     _initGame();
+  }
+
+  /// ハイスコアを読み込む
+  Future<void> _loadHighScore() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      highScore = prefs.getInt('high_score') ?? 0;
+    });
+  }
+
+  /// ハイスコアを保存する
+  Future<void> _saveHighScore(int score) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('high_score', score);
   }
 
   @override
@@ -185,6 +203,7 @@ class _GameScreenState extends State<GameScreen> {
     score = 0;
     isGameOver = false;
     isPaused = false;
+    isNewHighScore = false;
 
     // ゲームループ開始
     _startGameLoop();
@@ -299,6 +318,11 @@ class _GameScreenState extends State<GameScreen> {
     if (linesCleared > 0) {
       setState(() {
         score += linesCleared * 100;
+        if (score > highScore) {
+          highScore = score;
+          isNewHighScore = true;
+          _saveHighScore(highScore);
+        }
       });
     }
   }
@@ -369,9 +393,41 @@ class _GameScreenState extends State<GameScreen> {
                 // スコア表示
                 Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: Text(
-                    'Score: $score',
-                    style: Theme.of(context).textTheme.headlineMedium,
+                  child: Column(
+                    children: [
+                      Text(
+                        'Score: $score',
+                        style: Theme.of(context).textTheme.headlineMedium,
+                      ),
+                      const SizedBox(height: 8),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'High Score: $highScore',
+                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  color: Colors.amber,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                          ),
+                          if (isNewHighScore) ...[
+                            const SizedBox(width: 8),
+                            const Icon(
+                              Icons.star,
+                              color: Colors.amber,
+                              size: 24,
+                            ),
+                            const Text(
+                              'NEW!',
+                              style: TextStyle(
+                                color: Colors.amber,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ],
+                      ),
+                    ],
                   ),
                 ),
 

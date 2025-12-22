@@ -10,11 +10,13 @@ A classic falling block puzzle game built with Flutter, demonstrating game devel
 - 7 different block types (I, O, T, S, Z, J, L)
 - Block rotation
 - Line clearing with score tracking
+- **High score persistence** - Your best score is saved automatically
 - Next block preview
 - Keyboard controls (for desktop/web)
 - Touch controls (for mobile)
 - Pause/Resume functionality
 - Game over detection
+- New high score indicator with celebration animation
 
 ## Screenshots
 
@@ -68,8 +70,9 @@ The entire game is implemented in a single file (`lib/main.dart`) following the 
   - Collision detection
   - Block movement and rotation
   - Line clearing
-  - Score tracking
+  - Score tracking with high score persistence
   - Game loop using Timer
+  - SharedPreferences for data persistence
 
 ## Learning Points
 
@@ -81,6 +84,8 @@ This sample demonstrates several Flutter and game development concepts:
 4. **Keyboard Input**: Handling keyboard events with `KeyboardListener`
 5. **Custom Painting**: Drawing the game board with Container widgets
 6. **Grid Layout**: Managing a 2D array for the game board
+7. **Data Persistence**: Using `shared_preferences` to save and load high scores
+8. **Async Programming**: Handling asynchronous operations with `Future` and `async/await`
 
 ## AI Development Tips
 
@@ -98,9 +103,11 @@ Ask your AI assistant to help implement:
 - Different difficulty levels (faster falling)
 - Held block feature
 - Ghost block (shows where block will land)
-- High score persistence
+- Score history and statistics
 - Multiplayer mode
 - Custom themes/colors
+- Leaderboard with multiple high scores
+- Achievement system
 
 ## License
 
