@@ -58,14 +58,20 @@ GitHub ActionsでiOSのCI/CDを実現する方法を学びましたが、Apple�
 
 ### Individual vs Organization の違い
 
-| 登録タイプ | チームメンバー追加 | アプリ配布可能な役割 |
-|-----------|------------------|---------------------|
-| Individual | App Store Connect のみ（Developer Program には追加不可） | Account Holder のみ |
-| Organization | Developer Program に追加可能 | Account Holder, Admin, App Manager |
+| 登録タイプ | App Store Connect | Apple Developer Program（Certificates等） | アプリ配布可能な役割 |
+|-----------|------------------|------------------------------------------|---------------------|
+| Individual | メンバー追加可能（最大50人） | 追加不可 | Account Holder のみ |
+| Organization | メンバー追加可能（無制限） | メンバー追加可能 | Account Holder, Admin, App Manager |
 
-**注意**: Individual 登録の場合、他のメンバーを Xcode のチームに追加できません。チーム開発が必要な場合は Organization への変更を検討してください。
+**Individual 登録の制限**:
+- App Store Connect にはメンバーを追加できる
+- ただし、追加されたメンバーは Xcode のチームには表示されない（Certificates, Identifiers & Profiles にアクセス不可）
+- アプリの配布は Account Holder のみ
+
+チーム開発で Xcode の署名機能を共有する必要がある場合は、Organization への変更を検討してください。
 
 **公式ドキュメント**:
+- [Overview of accounts and roles](https://developer.apple.com/help/app-store-connect/manage-your-team/overview-of-accounts-and-roles/)
 - [Role Permissions](https://developer.apple.com/help/app-store-connect/reference/role-permissions/)
 - [Apple Developer Program Roles](https://developer.apple.com/support/roles/)
 
