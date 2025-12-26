@@ -6,10 +6,6 @@ GitHub ActionsでiOSのCI/CDを実現する方法を学びましたが、Apple�
 
 > **参考:** このレシピは[Flutter公式ドキュメントのXcode Cloudガイド](https://docs.flutter.dev/deployment/cd#xcode-cloud)に基づいています。
 
-**重要な公式ドキュメント**:
-- [Configuring Xcode Cloud for your team](https://developer.apple.com/documentation/xcode/configuring-xcode-cloud-for-your-team) - **必読**
-- [Requirements for using Xcode Cloud](https://developer.apple.com/documentation/xcode/requirements-for-using-xcode-cloud)
-
 ---
 
 ## Xcode Cloudとは？
@@ -35,104 +31,20 @@ GitHub ActionsでiOSのCI/CDを実現する方法を学びましたが、Apple�
 
 ---
 
-## 必要なアカウントと権限
+## 前提条件
 
-### Apple 関連
+Xcode Cloudを使用するには、以下が必要です。
 
-**注意**: **App Store Connect** と **Apple Developer Program** は別々のシステムです。両方でアクセス権が必要です。
-
-| サービス | 役割 | 必要な権限・条件 |
-|---------|------|-----------------|
-| Apple Developer Program | - | メンバーシップ登録必須（年額 $99） |
-| App Store Connect | Account Holder | 全権限。契約締結、メンバーシップ更新が可能 |
-| App Store Connect | Admin | ワークフロー作成、アプリ登録、ユーザー管理が可能 |
-| App Store Connect | App Manager | アプリ登録、TestFlight 管理が可能 |
-| App Store Connect | Developer | Create Apps permission があればアプリ登録可能 |
-| App Store Connect | Marketing | Create Apps permission があればアプリ登録可能 |
-
-### Xcode Cloud ワークフロー作成に必要な権限
-
-公式ドキュメント（[Get started with Xcode Cloud](https://developer.apple.com/xcode-cloud/get-started/)）より:
-
-> ワークフローの設定は、Account Holder、Admin、または App Manager が行えます。また、App Store Connect で **Create Apps permission** を付与された Developer または Marketing 役割のチームメンバーも設定可能です。
-
-### Individual vs Organization の違い
-
-| 登録タイプ | App Store Connect | Apple Developer Program（Certificates等） | アプリ配布可能な役割 |
-|-----------|------------------|------------------------------------------|---------------------|
-| Individual | メンバー追加可能（最大50人） | 追加不可 | Account Holder のみ |
-| Organization | メンバー追加可能（無制限） | メンバー追加可能 | Account Holder, Admin, App Manager |
-
-**Individual 登録の制限**:
-- App Store Connect にはメンバーを追加できる
-- ただし、追加されたメンバーは Xcode のチームには表示されない（Certificates, Identifiers & Profiles にアクセス不可）
-- アプリの配布は Account Holder のみ
-
-チーム開発で Xcode の署名機能を共有する必要がある場合は、Organization への変更を検討してください。
-
-**公式ドキュメント**:
-- [Overview of accounts and roles](https://developer.apple.com/help/app-store-connect/manage-your-team/overview-of-accounts-and-roles/)
-- [Role Permissions](https://developer.apple.com/help/app-store-connect/reference/role-permissions/)
-- [Apple Developer Program Roles](https://developer.apple.com/support/roles/)
-
-### GitHub / ソースコード管理
-
-| 権限 | Xcode Cloud 初期設定 | コード Push | ビルド結果閲覧 |
-|------|---------------------|------------|--------------|
-| Admin | ✅ | ✅ | ✅ |
-| Write | ❌ | ✅ | ✅ |
-| Read | ❌ | ❌ | ✅ |
-
-**重要**: Xcode Cloud の初期設定には **GitHub Admin 権限**が必要です。Webhook 設定と Apple との連携認証のためです。
-
-### ソースコードアクセスの管理
-
-App Store Connect でチームメンバーのソースコードアクセスを管理できます：
-
-**App Store Connect → Users and Access → Xcode Cloud タブ**
-
-ここで各メンバーに対して：
-- どのリポジトリにアクセスできるか
-- ビルドの閲覧・実行権限
-
-を設定できます。
-
-**公式ドキュメント**: [Configuring Xcode Cloud for your team](https://developer.apple.com/documentation/xcode/configuring-xcode-cloud-for-your-team)
-
----
-
-## 初期設定の前提条件
-
-### Xcode Cloud 初期設定に必要な環境
-
-Xcode Cloud の初期ワークフロー作成は **Mac 上の Xcode から行う必要があります**。
-
-**必要な条件**:
-1. **Mac** + **Xcode 15.0 以上**（公式要件）
-2. **Apple Developer Program メンバーシップ**
-3. **GitHub Admin 権限**を持つアカウント（リポジトリ接続時）
-4. **App Store Connect で適切な権限**:
-   - Account Holder、Admin、App Manager のいずれか
-   - または Developer/Marketing + Create Apps permission
-
-**公式ドキュメント**: [Requirements for using Xcode Cloud](https://developer.apple.com/documentation/xcode/requirements-for-using-xcode-cloud)
-
-### GitHub 管理者が Apple 開発者でない場合
-
-公式ドキュメントより:
-
-> リポジトリの管理者が Apple プラットフォーム開発の専門知識を持っていない場合でも、その管理者に Xcode Cloud 用のプロジェクト設定を行わせ、**最初のビルドが失敗しても問題ありません**。
-
-つまり：
-1. GitHub Admin が Mac + Xcode で初期接続のみ行う
-2. 最初のビルドは失敗しても OK
-3. その後、iOS 開発者がワークフローを修正
+*   **Apple Developer Program**への登録（年間99ドル）
+*   **Xcode 15以降**がインストールされたMac
+*   **App Store Connect**へのアクセス権
+*   **GitHubリポジトリ**（またはGitLab、Bitbucket）に管理されているFlutterプロジェクト
 
 ### 無料枠について
 
 - **毎月 25 compute hours** が無料で利用可能
 - compute hour = クラウドでタスク実行に使用した時間
-- 追加の compute hours が必要な場合は、Account Holder がサブスクリプションを購入
+- 追加が必要な場合は有料プランを購入
 
 ---
 
@@ -530,6 +442,144 @@ cd frontend/myapp  # ← サブディレクトリに移動
 
 ---
 
+## まとめ
+
+Xcode Cloudを使うことで、以下が実現できました。
+
+✅ GitHubへのプッシュやタグで自動的にiOSアプリをビルド
+✅ 証明書とプロビジョニングプロファイルの自動管理
+✅ TestFlightへの自動配布で、テスターにすぐに新しいビルドを届けられる
+✅ XcodeのGUIから直接設定でき、YAMLファイルを書く必要がない
+
+Xcode CloudはAppleエコシステムとの統合に優れており、特にiOS専用のプロジェクトや、証明書管理の複雑さを避けたい場合に最適です。
+
+一方、AndroidとiOSを同じCI/CDで管理したい場合や、より高度なカスタマイズが必要な場合は、GitHub Actionsの方が適している場合もあります。プロジェクトのニーズに応じて、最適なCI/CDツールを選択しましょう！
+
+---
+
+## チェックリスト
+
+### 初期設定
+
+- [ ] Apple Developer Program 登録済み
+- [ ] App Store Connect でアプリ登録済み
+- [ ] Bundle ID 登録済み
+- [ ] Xcode で Signing & Capabilities 設定済み
+- [ ] Info.plist に必要な説明を追加済み
+- [ ] Podfile で iOS バージョン指定済み
+- [ ] `ci_post_clone.sh` 作成・コミット済み
+
+### Xcode Cloud 設定
+
+- [ ] Xcode からワークフロー作成済み
+- [ ] 初回ビルド成功
+
+### TestFlight 配布
+
+- [ ] Archive 作成成功
+- [ ] App Store Connect にアップロード成功
+- [ ] テスターに招待送信済み
+
+---
+
+## 参考リンク
+
+- [Flutter Continuous Delivery](https://docs.flutter.dev/deployment/cd) - **CI/CD 公式ガイド（必読）**
+- [Flutter iOS デプロイ](https://docs.flutter.dev/deployment/ios)
+- [Requirements for using Xcode Cloud](https://developer.apple.com/documentation/xcode/requirements-for-using-xcode-cloud) - 必要要件
+- [Get started with Xcode Cloud](https://developer.apple.com/xcode-cloud/get-started/) - 概要と料金
+- [Writing custom build scripts](https://developer.apple.com/documentation/xcode/writing-custom-build-scripts) - カスタムスクリプト
+
+---
+---
+
+# チーム開発ガイド
+
+ここからは、**複数人のチームで Xcode Cloud を運用する場合**に必要な権限設定やワークフローについて説明します。
+
+> **重要な公式ドキュメント**: [Configuring Xcode Cloud for your team](https://developer.apple.com/documentation/xcode/configuring-xcode-cloud-for-your-team) - **必読**
+
+---
+
+## チーム開発で必要なアカウントと権限
+
+### Apple 関連
+
+**注意**: **App Store Connect** と **Apple Developer Program** は別々のシステムです。両方でアクセス権が必要です。
+
+| サービス | 役割 | 必要な権限・条件 |
+|---------|------|-----------------|
+| Apple Developer Program | - | メンバーシップ登録必須（年額 $99） |
+| App Store Connect | Account Holder | 全権限。契約締結、メンバーシップ更新が可能 |
+| App Store Connect | Admin | ワークフロー作成、アプリ登録、ユーザー管理が可能 |
+| App Store Connect | App Manager | アプリ登録、TestFlight 管理が可能 |
+| App Store Connect | Developer | Create Apps permission があればアプリ登録可能 |
+| App Store Connect | Marketing | Create Apps permission があればアプリ登録可能 |
+
+### Xcode Cloud ワークフロー作成に必要な権限
+
+公式ドキュメント（[Get started with Xcode Cloud](https://developer.apple.com/xcode-cloud/get-started/)）より:
+
+> ワークフローの設定は、Account Holder、Admin、または App Manager が行えます。また、App Store Connect で **Create Apps permission** を付与された Developer または Marketing 役割のチームメンバーも設定可能です。
+
+### Individual vs Organization の違い
+
+| 登録タイプ | App Store Connect | Apple Developer Program（Certificates等） | アプリ配布可能な役割 |
+|-----------|------------------|------------------------------------------|---------------------|
+| Individual | メンバー追加可能（最大50人） | 追加不可 | Account Holder のみ |
+| Organization | メンバー追加可能（無制限） | メンバー追加可能 | Account Holder, Admin, App Manager |
+
+**Individual 登録の制限**:
+- App Store Connect にはメンバーを追加できる
+- ただし、追加されたメンバーは Xcode のチームには表示されない（Certificates, Identifiers & Profiles にアクセス不可）
+- アプリの配布は Account Holder のみ
+
+チーム開発で Xcode の署名機能を共有する必要がある場合は、Organization への変更を検討してください。
+
+**公式ドキュメント**:
+- [Overview of accounts and roles](https://developer.apple.com/help/app-store-connect/manage-your-team/overview-of-accounts-and-roles/)
+
+---
+
+## GitHub 権限
+
+| 権限 | Xcode Cloud 初期設定 | コード Push | ビルド結果閲覧 |
+|------|---------------------|------------|--------------|
+| Admin | ✅ | ✅ | ✅ |
+| Write | ❌ | ✅ | ✅ |
+| Read | ❌ | ❌ | ✅ |
+
+**重要**: Xcode Cloud の初期設定には **GitHub Admin 権限**が必要です。Webhook 設定と Apple との連携認証のためです。
+
+### GitHub 管理者が Apple 開発者でない場合
+
+公式ドキュメントより:
+
+> リポジトリの管理者が Apple プラットフォーム開発の専門知識を持っていない場合でも、その管理者に Xcode Cloud 用のプロジェクト設定を行わせ、**最初のビルドが失敗しても問題ありません**。
+
+つまり：
+1. GitHub Admin が Mac + Xcode で初期接続のみ行う
+2. 最初のビルドは失敗しても OK
+3. その後、iOS 開発者がワークフローを修正
+
+---
+
+## ソースコードアクセスの管理
+
+App Store Connect でチームメンバーのソースコードアクセスを管理できます：
+
+**App Store Connect → Users and Access → Xcode Cloud タブ**
+
+ここで各メンバーに対して：
+- どのリポジトリにアクセスできるか
+- ビルドの閲覧・実行権限
+
+を設定できます。
+
+**公式ドキュメント**: [Configuring Xcode Cloud for your team](https://developer.apple.com/documentation/xcode/configuring-xcode-cloud-for-your-team)
+
+---
+
 ## 役割別の作業範囲
 
 ### iOS 担当者
@@ -557,59 +607,33 @@ cd frontend/myapp  # ← サブディレクトリに移動
 
 ---
 
-## チェックリスト
+## チーム開発チェックリスト
 
-### 初期設定
+### 権限設定
 
-- [ ] Apple Developer Program 登録済み
-- [ ] App Store Connect でアプリ登録済み
-- [ ] Bundle ID 登録済み
-- [ ] Xcode で Signing & Capabilities 設定済み
-- [ ] Info.plist に必要な説明を追加済み
-- [ ] Podfile で iOS バージョン指定済み
-- [ ] `ci_post_clone.sh` 作成・コミット済み
+- [ ] Apple Developer Program に Organization で登録済み（チーム共有が必要な場合）
+- [ ] App Store Connect でチームメンバーに適切な役割を付与済み
+- [ ] GitHub リポジトリで Admin 権限を持つメンバーがいる
 
-### Xcode Cloud 設定
+### Xcode Cloud 初期設定
 
-- [ ] GitHub Admin 権限あり
+- [ ] GitHub Admin 権限を持つメンバーが初期接続を実施
 - [ ] Xcode からワークフロー作成済み
-- [ ] 初回ビルド成功
+- [ ] App Store Connect でソースコードアクセスを設定済み
 
-### TestFlight 配布
+### 運用
 
-- [ ] Archive 作成成功
-- [ ] App Store Connect にアップロード成功
-- [ ] テスターに招待送信済み
-
----
-
-## まとめ
-
-Xcode Cloudを使うことで、以下が実現できました。
-
-✅ GitHubへのプッシュやタグで自動的にiOSアプリをビルド
-✅ 証明書とプロビジョニングプロファイルの自動管理
-✅ TestFlightへの自動配布で、テスターにすぐに新しいビルドを届けられる
-✅ XcodeのGUIから直接設定でき、YAMLファイルを書く必要がない
-
-Xcode CloudはAppleエコシステムとの統合に優れており、特にiOS専用のプロジェクトや、証明書管理の複雑さを避けたい場合に最適です。
-
-一方、AndroidとiOSを同じCI/CDで管理したい場合や、より高度なカスタマイズが必要な場合は、GitHub Actionsの方が適している場合もあります。プロジェクトのニーズに応じて、最適なCI/CDツールを選択しましょう！
+- [ ] 役割別の作業範囲をチームで共有済み
+- [ ] ビルド失敗時の対応フローを決定済み
 
 ---
 
-## 参考リンク
+## チーム開発 参考リンク
 
-### Xcode Cloud（必読）
+### Xcode Cloud
 - [Configuring Xcode Cloud for your team](https://developer.apple.com/documentation/xcode/configuring-xcode-cloud-for-your-team) - **チーム設定の公式ガイド**
-- [Requirements for using Xcode Cloud](https://developer.apple.com/documentation/xcode/requirements-for-using-xcode-cloud) - 必要要件
-- [Get started with Xcode Cloud](https://developer.apple.com/xcode-cloud/get-started/) - 概要と料金
 
 ### 権限・役割
 - [App Store Connect Role Permissions](https://developer.apple.com/help/app-store-connect/reference/role-permissions/) - 権限一覧表
 - [Apple Developer Program Roles](https://developer.apple.com/support/roles/) - 役割の詳細
 - [Overview of accounts and roles](https://developer.apple.com/help/app-store-connect/manage-your-team/overview-of-accounts-and-roles/) - アカウント管理
-
-### Flutter
-- [Flutter Continuous Delivery](https://docs.flutter.dev/deployment/cd) - **CI/CD 公式ガイド（必読）**
-- [Flutter iOS デプロイ](https://docs.flutter.dev/deployment/ios)
